@@ -5,7 +5,6 @@
  */
 package lab9_fernandogoti;
 
-import java.util.Date;
 
 /**
  *
@@ -15,12 +14,12 @@ public class Personas {
 
     private String Nombre;
     private long Id;
-    private Date Fecha;
+    private String Fecha;
 
     public Personas() {
     }
 
-    public Personas(String Nombre, long Id, Date Fecha) {
+    public Personas(String Nombre, long Id, String Fecha) {
         this.Nombre = Nombre;
         this.Id = Id;
         this.Fecha = Fecha;
@@ -42,11 +41,11 @@ public class Personas {
         this.Id = Id;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return Fecha;
     }
 
-    public void setFecha(Date Fecha) {
+    public void setFecha(String Fecha) {
         this.Fecha = Fecha;
     }
 

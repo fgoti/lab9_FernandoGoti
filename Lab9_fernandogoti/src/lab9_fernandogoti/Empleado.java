@@ -14,7 +14,6 @@ import java.util.Date;
 public class Empleado extends Personas {
 
     private String Rol;
-    private String hora_llrgada;
     private String hora_entrada;
     private String hora_salida;
     private long Sueldo;
@@ -23,14 +22,15 @@ public class Empleado extends Personas {
         super();
     }
 
-    public Empleado(String Rol, String hora_llrgada, String hora_entrada, String hora_salida, long Sueldo, String Nombre, long Id, Date Fecha) {
+    public Empleado(String Rol, String hora_entrada, String hora_salida, long Sueldo, String Nombre, long Id, String Fecha) {
         super(Nombre, Id, Fecha);
         this.Rol = Rol;
-        this.hora_llrgada = hora_llrgada;
         this.hora_entrada = hora_entrada;
         this.hora_salida = hora_salida;
         this.Sueldo = Sueldo;
     }
+
+
 
     public String getRol() {
         return Rol;
@@ -38,14 +38,6 @@ public class Empleado extends Personas {
 
     public void setRol(String Rol) {
         this.Rol = Rol;
-    }
-
-    public String getHora_llrgada() {
-        return hora_llrgada;
-    }
-
-    public void setHora_llrgada(String hora_llrgada) {
-        this.hora_llrgada = hora_llrgada;
     }
 
     public String getHora_entrada() {

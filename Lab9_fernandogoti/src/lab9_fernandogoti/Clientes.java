@@ -11,19 +11,20 @@ import java.util.Date;
  *
  * @author Fernando Goti
  */
-public class Clientes extends Personas{
+public class Clientes extends Personas {
+
     private String lugar_residencia;
     private String hora_entrenamiento;
     private String Nombre_instructor;
     private String Membresia;
-    private String Peso;
-    private String Altura;
+    private int Peso;
+    private double Altura;
 
     public Clientes() {
         super();
     }
 
-    public Clientes(String lugar_residencia, String hora_entrenamiento, String Nombre_instructor, String Membresia, String Peso, String Altura, String Nombre, long Id, Date Fecha) {
+    public Clientes(String lugar_residencia, String hora_entrenamiento, String Nombre_instructor, String Membresia, int Peso, double Altura, String Nombre, long Id, String Fecha) {
         super(Nombre, Id, Fecha);
         this.lugar_residencia = lugar_residencia;
         this.hora_entrenamiento = hora_entrenamiento;
@@ -65,19 +66,19 @@ public class Clientes extends Personas{
         this.Membresia = Membresia;
     }
 
-    public String getPeso() {
+    public int getPeso() {
         return Peso;
     }
 
-    public void setPeso(String Peso) {
+    public void setPeso(int Peso) {
         this.Peso = Peso;
     }
 
-    public String getAltura() {
+    public double getAltura() {
         return Altura;
     }
 
-    public void setAltura(String Altura) {
+    public void setAltura(double Altura) {
         this.Altura = Altura;
     }
 
@@ -85,7 +86,5 @@ public class Clientes extends Personas{
     public String toString() {
         return super.getNombre();
     }
-    
-    
-    
+
 }
