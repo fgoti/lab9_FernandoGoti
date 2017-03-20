@@ -5,7 +5,11 @@
  */
 package lab9_fernandogoti;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -584,6 +588,11 @@ public class Main extends javax.swing.JFrame {
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Guardar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
@@ -650,21 +659,21 @@ public class Main extends javax.swing.JFrame {
         Nombre = texnombre.getText();
         Id = Long.parseLong(texidentidad.getText());
         Fecha = texfecha_nacimiento.getText();
-        if (TabPersonas.getSelectedIndex() == 1) {
+        if (TabPersonas.getSelectedIndex() == 0) {
             Rol = (String) combo_empleado.getSelectedItem();
             hora_entrada = texhora_entrada.getText();
             hora_salida = texhora_salida.getText();
             Sueldo = Long.parseLong(texsueldo.getText());
-            Lpersonas.add(new Empleado(Rol, hora_entrada, hora_salida, Sueldo, Nombre, Id, Fecha));
+            Lempleados.add(new Empleado(Rol, hora_entrada, hora_salida, Sueldo, Nombre, Id, Fecha));
             JOptionPane.showMessageDialog(this, "Se agrego exitosamente el empleado");
-        } else if (TabPersonas.getSelectedIndex() == 2) {
+        } else if (TabPersonas.getSelectedIndex() == 1) {
             lugar_residencia = texresidencia.getText();
             hora_entrenamiento = texentrenamiento.getText();
             Nombre_instructor = (String) combo_instructor.getSelectedItem();
             Membresia = (String) combo_membresia.getSelectedItem();
             Peso = Integer.parseInt(texpeso.getText());
             Altura = Double.parseDouble(texaltura.getText());
-            Lpersonas.add(new Clientes(lugar_residencia, hora_entrenamiento, Nombre_instructor, Membresia, Peso, Altura, Nombre, Id, Fecha));
+            Lclientes.add(new Clientes(lugar_residencia, hora_entrenamiento, Nombre_instructor, Membresia, Peso, Altura, Nombre, Id, Fecha));
             JOptionPane.showMessageDialog(this, "Se agrego exitosamente el cliente");
         }
         texnombre.setText("");
@@ -676,8 +685,6 @@ public class Main extends javax.swing.JFrame {
         texsueldo.setText("");
         texresidencia.setText("");
         texentrenamiento.setText("");
-        combo_instructor.setSelectedIndex(0);
-        combo_membresia.setSelectedIndex(0);
         texpeso.setText("");
         texaltura.setText("");
 
@@ -737,8 +744,6 @@ public class Main extends javax.swing.JFrame {
             Altura = Double.parseDouble(texaltura.getText());
             JOptionPane.showMessageDialog(this, "Se agrego exitosamente el cliente");
         }
-        Lpersonas.get(pos).getNombre(Nombre);
-        Lpersonas.get(pos).getId()
 
 
     }//GEN-LAST:event_BotonModificarMouseClicked
@@ -746,6 +751,53 @@ public class Main extends javax.swing.JFrame {
     private void combo_modififcarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combo_modififcarItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_modififcarItemStateChanged
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        JFileChooser jfc = new JFileChooser();
+        int seleccion = jfc.showSaveDialog(this);
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            try {
+                File fichero = jfc.getSelectedFile();
+                fw = new FileWriter(fichero);
+                bw = new BufferedWriter(fw);
+                for (Empleado t : Lempleados) {
+                    bw.write(t.getNombre() + ";");
+                    bw.write((int) t.getId() + ";");
+                    bw.write(t.getFecha() + ";");
+                    bw.write(t.getHora_entrada() + ";");
+                    bw.write(t.getHora_salida() + ";");
+                    bw.write(t.getRol() + ";");
+                    bw.write((int) t.getSueldo() + ";");
+                }
+                for (Clientes t : Lclientes) {
+                    bw.write(t.getHora_entrenamiento());
+                    bw.write(t.getLugar_residencia());
+                    bw.write(t.getMembresia());
+                    bw.write(t.getNombre_instructor());
+                    bw.write(t.getPeso());
+                    bw.write((int) t.getAltura());
+                }
+                for (Maquinas a : Lmaquinas) {
+                    bw.write(a.getFuncion());
+                    bw.write(a.getMaterial());
+                    bw.write(a.getVida_util());
+                    bw.write((int) a.getNumero_serie());
+                }
+                bw.flush();
+                JOptionPane.showMessageDialog(this, "Se guardo exitosamente");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    bw.close();
+                    fw.close();
+                } catch (Exception e) {
+                }
+            }
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -864,7 +916,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField texsueldo;
     private javax.swing.JTextField texsueldo1;
     // End of variables declaration//GEN-END:variables
-    ArrayList<Personas> Lpersonas = new ArrayList();
+    ArrayList<Empleado> Lempleados = new ArrayList();
+    ArrayList<Clientes> Lclientes = new ArrayList();
     ArrayList<Maquinas> Lmaquinas = new ArrayList();
 
 }
